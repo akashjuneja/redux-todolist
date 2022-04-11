@@ -1,3 +1,4 @@
+import axios from 'axios'
 const addlist=(item)=>{
      return {
          type:"ADD_LIST",
@@ -12,4 +13,14 @@ const removeItem=(id)=>{
      }
 }
 
-export default {addlist,removeItem}
+const loadTodo=()=>{
+    return async dispatch =>{
+       const todo = await axios.get("https://jsonplaceholder.typicode.com/todos")
+       const data= await todo.data
+    return dispatch({
+        type:"LOAD_API",
+         payload:data
+    })
+    }
+}
+export  {addlist,removeItem,loadTodo}
